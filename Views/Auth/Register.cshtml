@@ -1,0 +1,31 @@
+@model RentalHosting_64130107.Models.KhachHangModel_64130107
+
+<h2>Đăng ký</h2>
+
+<form asp-action="Register" method="post">
+    <div>
+        <label>Họ tên:</label>
+        <input asp-for="HoTen" />
+        <span asp-validation-for="HoTen"></span>
+    </div>
+    <div>
+        <label>Email:</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label>Mật khẩu:</label>
+        <input asp-for="MatKhau" type="password" />
+        <span asp-validation-for="MatKhau"></span>
+    </div>
+    <div>
+        <label>Số điện thoại:</label>
+        <input asp-for="SoDienThoai" />
+    </div>
+    <div>
+        <label>Địa chỉ:</label>
+        <input asp-for="DiaChi" />
+    </div>
+    <button type="submit">Đăng ký</button>
+</form>
+<a asp-action="Login">Đăng nhập</a>

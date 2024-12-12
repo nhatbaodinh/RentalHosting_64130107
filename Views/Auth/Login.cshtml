@@ -1,0 +1,19 @@
+<h2>Đăng nhập</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color: red">@ViewBag.Error</div>
+}
+
+<form asp-action="Login" method="post">
+    <div>
+        <label>Email:</label>
+        <input type="email" name="email" required />
+    </div>
+    <div>
+        <label>Mật khẩu:</label>
+        <input type="password" name="password" required />
+    </div>
+    <button type="submit">Đăng nhập</button>
+</form>
+<a asp-action="Register">Đăng ký</a>
