@@ -245,6 +245,18 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
+      "Id": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/server.png",
+      "PackagePath": "staticwebassets/server.png"
+    },
+    {
+      "Id": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/user.png",
+      "PackagePath": "staticwebassets/user.png"
+    },
+    {
+      "Id": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/user2.png",
+      "PackagePath": "staticwebassets/user2.png"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.RentalHosting_64130107.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

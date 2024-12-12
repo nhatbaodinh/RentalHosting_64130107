@@ -51,3 +51,15 @@ button.accept-policy[b-l6nqjh5lew] {
 .dropdown-toggle[b-l6nqjh5lew]::after {
   display: none;
 }
+
+.user-avatar[b-l6nqjh5lew] {
+  background-image: url('user.png');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+}
+
+.user-avatar:hover[b-l6nqjh5lew],
+.user-avatar:focus[b-l6nqjh5lew] {
+  background-image: url('user2.png');
+}

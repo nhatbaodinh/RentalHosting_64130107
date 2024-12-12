@@ -50,3 +50,15 @@ button.accept-policy {
 .dropdown-toggle::after {
   display: none;
 }
+
+.user-avatar {
+  background-image: url('user.png');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+}
+
+.user-avatar:hover,
+.user-avatar:focus {
+  background-image: url('user2.png');
+}
