@@ -158,5 +158,71 @@ namespace RentalHosting_64130107.Controllers
             // Nếu ModelState không hợp lệ, quay lại trang chỉnh sửa
             return View(model);
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            // Lấy UserID từ Claims
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int userIdInt))
+            {
+                // Tìm người dùng trong cơ sở dữ liệu
+                var user = await _context.NguoiDung.FirstOrDefaultAsync(u => u.NguoiDungId == userIdInt);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View();
+            }
+
+            return BadRequest("Invalid user ID");
+        }
+        
+        // POST: ChangePassword
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
+            // Lấy UserID từ Claims
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int userIdInt))
+            {
+                // Tìm người dùng trong cơ sở dữ liệu
+                var user = await _context.NguoiDung.FirstOrDefaultAsync(u => u.NguoiDungId == userIdInt);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                // Kiểm tra mật khẩu hiện tại
+                if (user.MatKhau != currentPassword)
+                {
+                    ModelState.AddModelError("currentPassword", "Mật khẩu hiện tại không chính xác.");
+                    return View();
+                }
+
+                // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+                if (newPassword != confirmPassword)
+                {
+                    ModelState.AddModelError("confirmPassword", "Mật khẩu xác nhận không khớp.");
+                    return View();
+                }
+
+                // Cập nhật mật khẩu mới
+                user.MatKhau = newPassword;
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+
+                // Sau khi lưu, chuyển hướng lại trang đổi mật khẩu
+                TempData["SuccessMessage"] = "Mật khẩu của bạn đã được thay đổi thành công!";
+                return RedirectToAction("ChangePassword");
+            }
+
+            return BadRequest("Invalid user ID");
+        }
     }
 }

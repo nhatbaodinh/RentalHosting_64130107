@@ -30,8 +30,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvQ29udHJhY3REZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/HopDongController_64130107/DeleteContract.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvRGVsZXRlQ29udHJhY3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/HopDongController_64130107/GetContracts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvR2V0Q29udHJhY3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/HopDongController_64130107/RegisterContract.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvUmVnaXN0ZXJDb250cmFjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/NguoiDungController_64130107/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTmd1b2lEdW5nQ29udHJvbGxlcl82NDEzMDEwNy9DaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/NguoiDungController_64130107/EditProfile.cshtml]
