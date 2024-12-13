@@ -14,8 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Đường dẫn nếu chưa đăng nhập
-        options.LogoutPath = "/Account/Logout"; // Đường dẫn đăng xuất
+        options.LoginPath = "/NguoiDungController_64130107/Login"; // Đường dẫn nếu chưa đăng nhập
+        options.LogoutPath = "/NguoiDungController_64130107/Logout"; // Đường dẫn đăng xuất
     });
 
 var app = builder.Build();

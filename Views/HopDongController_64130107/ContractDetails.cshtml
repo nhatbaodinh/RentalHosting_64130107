@@ -1,0 +1,23 @@
+@model dynamic
+
+@{
+ViewData["Title"] = "Chi tiết hợp đồng";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card">
+	<div class="card-body">
+		<p><strong>Mã hợp đồng:</strong> @Model.HopDongId</p>
+		<p><strong>Tên Hosting:</strong> @Model.TenHosting</p>
+		<p><strong>Mô Tả:</strong> @Model.MoTa</p>
+		<p><strong>Ngày Bắt Đầu:</strong> @Model.NgayBatDau.ToString("dd/MM/yyyy")</p>
+		<p><strong>Ngày Kết Thúc:</strong> @Model.NgayKetThuc.ToString("dd/MM/yyyy")</p>
+		<p><strong>Trạng Thái:</strong> @Model.TrangThai</p>
+		<p><strong>Giá:</strong> @Model.Gia.ToString("C")</p>
+		<p><strong>Nhân Viên Hỗ Trợ:</strong> @Model.NhanVienHoTen</p>
+		<p><strong>Email Nhân Viên:</strong> @Model.EmailNhanVien</p>
+	</div>
+</div>
+
+<a href="@Url.Action("GetContracts", "HopDongController_64130107")" class="btn btn-primary">Quay lại danh sách</a>

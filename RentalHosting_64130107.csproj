@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\HostingController_6413017\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\HostingController_6413017\Rent.cshtml" />
+  </ItemGroup>
+
 </Project>

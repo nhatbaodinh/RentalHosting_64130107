@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "j0Qx++J4KaKuIfYUAe0FUJlfOYNPk1eUSHAh178sayo=",
+  "Hash": "GO/ks0P48NIC8zTyb++0Utz4A018Vuezd4CVNVL9WyQ=",
   "Source": "RentalHosting_64130107",
   "BasePath": "_content/RentalHosting_64130107",
   "Mode": "Default",
@@ -1193,25 +1193,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/jquery/LICENSE.txt"
-    },
-    {
-      "Identity": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/server.png",
-      "SourceId": "RentalHosting_64130107",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/",
-      "BasePath": "_content/RentalHosting_64130107",
-      "RelativePath": "server.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/server.png"
     },
     {
       "Identity": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/user.png",

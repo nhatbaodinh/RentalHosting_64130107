@@ -245,10 +245,6 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
-      "Id": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/server.png",
-      "PackagePath": "staticwebassets/server.png"
-    },
-    {
       "Id": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/wwwroot/user.png",
       "PackagePath": "staticwebassets/user.png"
     },

@@ -18,28 +18,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/nhatbaodinh/Dev/RentalHosting_64130107
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Account/ChangePassword.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9DaGFuZ2VQYXNzd29yZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Account/EditProfile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9FZGl0UHJvZmlsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Auth/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9Mb2dpbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Auth/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZWdpc3Rlci5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/HopDongController_64130107/ContractDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvQ29udHJhY3REZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/HopDongController_64130107/GetContracts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvR2V0Q29udHJhY3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/NguoiDungController_64130107/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTmd1b2lEdW5nQ29udHJvbGxlcl82NDEzMDEwNy9FZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/NguoiDungController_64130107/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTmd1b2lEdW5nQ29udHJvbGxlcl82NDEzMDEwNy9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/NguoiDungController_64130107/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTmd1b2lEdW5nQ29udHJvbGxlcl82NDEzMDEwNy9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/RentalHosting_64130107/Views/Shared/Error.cshtml]

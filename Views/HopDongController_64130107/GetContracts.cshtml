@@ -1,0 +1,39 @@
+@model IEnumerable<dynamic>
+
+@{
+ViewData["Title"] = "Danh sách dịch vụ của bạn";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>ID Hợp Đồng</th>
+		<th>Tên Hosting</th>
+		<th>Ngày Bắt Đầu</th>
+		<th>Ngày Kết Thúc</th>
+		<th>Trạng Thái</th>
+		<th>Người Hỗ Trợ</th>
+		<th>Quản lý</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var contract in Model)
+	{
+	<tr>
+		<td>@contract.HopDongId</td>
+		<td>@contract.HostingName</td>
+		<td>@contract.NgayBatDau.ToString("dd/MM/yyyy")</td>
+		<td>@contract.NgayKetThuc.ToString("dd/MM/yyyy")</td>
+		<td>@contract.TrangThai</td>
+		<td>@contract.SupportPerson</td>
+		<td>
+			<a href="@Url.Action("ContractDetails", "HopDongController_64130107", new { id = contract.HopDongId })">Chi tiết</a> |
+			<a href="@Url.Action("Details", "Contract", new { id = contract.HopDongId })">Gia hạn</a> |
+			<a href="@Url.Action("Support", "Contract", new { id = contract.HopDongId })">Hỗ trợ</a>
+		</td>
+	</tr>
+	}
+	</tbody>
+</table>

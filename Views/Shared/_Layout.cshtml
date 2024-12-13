@@ -21,7 +21,7 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dịch vụ</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="HopDongController_64130107" asp-action="GetContracts">Dịch vụ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Thanh Toán</a>
@@ -43,13 +43,10 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="EditProfile">Chỉnh sửa thông tin</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="NguoiDungController_64130107" asp-action="EditProfile">Chỉnh sửa thông tin</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword">Đổi mật khẩu</a>
-                            </li>
-                            <li>
-                                <form asp-area="" asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
+                                <form asp-area="" asp-controller="NguoiDungController_64130107" asp-action="Logout" method="post" class="d-inline">
                                     <button class="dropdown-item" type="submit">Đăng xuất</button>
                                 </form>
                             </li>
@@ -60,7 +57,7 @@
                     {
                     <!-- Nút Đăng nhập -->
                     <li class="nav-item">
-                        <a class="btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Login">Đăng nhập</a>
+                        <a class="btn btn-primary" asp-area="" asp-controller="NguoiDungController_64130107" asp-action="Login">Đăng nhập</a>
                     </li>
                     }
                 </ul>
