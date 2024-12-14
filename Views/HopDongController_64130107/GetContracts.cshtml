@@ -1,20 +1,35 @@
 @model IEnumerable<dynamic>
 
 @{
-ViewData["Title"] = "Danh sách hợp đồng";
+ViewData["Title"] = "Danh sách dịch vụ";
 var isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
 }
 
 <div class="container mt-5">
 	<h2>@ViewData["Title"]</h2>
-
+	
 	<div class="d-flex justify-content-end mb-3">
 		@if (!isAdmin)
 		{
-		<a href="@Url.Action("RegisterContract", "HopDongController_64130107")" class="btn btn-primary">Thuê dịch vụ</a>
+			<a href="@Url.Action("RegisterContract", "HopDongController_64130107")" class="btn btn-primary">Thuê dịch vụ</a>
+		}
+		else
+		{
+			<!-- Thêm hộp tìm kiếm cho admin -->
+			<form class="d-flex mb-3" action="@Url.Action("SearchContract", "HopDongController_64130107")" method="get">
+				<input type="text" name="contractId" class="form-control me-2" placeholder="Tìm kiếm theo ID hợp đồng" />
+				<button type="submit" class="btn btn-secondary">Tìm kiếm</button>
+			</form>
 		}
 	</div>
-
+	@if (TempData["ErrorMessage"] != null)
+	{
+	<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+	}
+	@if (TempData["SuccessMessage"] != null)
+	{
+	<div class="alert alert-success">@TempData["SuccessMessage"]</div>
+	}
 	<table class="table table-striped table-bordered">
 		<thead class="thead-dark">
 		<tr>
@@ -37,17 +52,18 @@ var isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
 			<td>@contract.NgayKetThuc.ToString("dd/MM/yyyy")</td>
 			<td>@contract.TrangThai</td>
 			<td>@contract.SupportPerson</td>
-			<td>
+			<td style="white-space: nowrap;">
 				<a href="@Url.Action("ContractDetails", "HopDongController_64130107", new { id = contract.HopDongId })" class="btn btn-info btn-sm">Chi tiết</a>
-				<a href="@Url.Action("Details", "Contract", new { id = contract.HopDongId })" class="btn btn-warning btn-sm">Gia hạn</a>
 				@if (isAdmin)
 				{
-					<form asp-action="DeleteContract" asp-route-id="@contract.HopDongId" method="post" onsubmit="return confirm('Bạn có chắc muốn xóa hợp đồng này?');">
-						<button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-					</form>
+				<a href="@Url.Action("EditContract", "HopDongController_64130107", new { id = contract.HopDongId })" class="btn btn-warning btn-sm">Chỉnh sửa</a>
+				<form asp-action="DeleteContract" asp-route-id="@contract.HopDongId" method="post" onsubmit="return confirm('Bạn có chắc muốn xóa hợp đồng này?');" style="display: inline-block;">
+					<button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+				</form>
 				}
 				else
 				{
+				<a href="@Url.Action("Details", "HopDongController_64130107", new { id = contract.HopDongId })" class="btn btn-warning btn-sm">Gia hạn</a>
 				<a href="@Url.Action("Support", "HopDongController_64130107", new { id = contract.HopDongId })" class="btn btn-success btn-sm">Hỗ trợ</a>
 				}
 			</td>

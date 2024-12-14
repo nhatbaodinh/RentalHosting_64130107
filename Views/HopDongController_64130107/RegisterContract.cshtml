@@ -20,7 +20,7 @@ ViewData["Title"] = "Register Contract";
         <label for="hostingId" class="form-label">Select Hosting</label>
         <select asp-for="HostingId" id="hostingId" class="form-control" required>
             <option value="">-- Select Hosting --</option>
-            @foreach (var hosting in Model.Hostings)
+            @foreach (var hosting in Model.Hosting)
             {
                 <option value="@hosting.HostingId" data-price="@hosting.DonGia">@hosting.TenHosting - @hosting.DonGia VND</option>
             }

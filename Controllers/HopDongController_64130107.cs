@@ -69,39 +69,48 @@ namespace RentalHosting_64130107.Controllers
         [HttpGet]
         public async Task<IActionResult> ContractDetails(int id)
         {
-            // Lấy UserID từ Claims
+            // Lấy UserID và Role từ Claims
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userId, out int userIdInt))
-            {
-                // Tìm hợp đồng thuộc về người dùng hiện tại và có ID khớp
-                var contractDetails = await (from hd in _context.HopDong
-                    join cthd in _context.ChiTietHopDong on hd.HopDongId equals cthd.HopDongId
-                    join h in _context.Hosting on cthd.HostingId equals h.HostingId
-                    join nd in _context.NguoiDung on hd.NhanVienId equals nd.NguoiDungId
-                    where hd.HopDongId == id && hd.NguoiDungId == userIdInt
-                    select new
-                    {
-                        HopDongId = hd.HopDongId,
-                        TenHosting = h.TenHosting,
-                        MoTa = h.MoTa, // Thêm mô tả dịch vụ hosting
-                        NgayBatDau = hd.NgayBatDau,
-                        NgayKetThuc = hd.NgayKetThuc,
-                        TrangThai = hd.TrangThai == 0 ? "Đang chờ kích hoạt" :
-                            hd.TrangThai == 1 ? "Đang hoạt động" : "Đã hủy",
-                        Gia = cthd.DonGia, // Giá của dịch vụ trong hợp đồng
-                        NhanVienHoTen = nd.HoTen,
-                        EmailNhanVien = nd.Email // Email nhân viên hỗ trợ
-                    }).FirstOrDefaultAsync();
+            var role = User.FindFirstValue(ClaimTypes.Role); // Role = "2" là Admin
 
-                if (contractDetails == null)
+            // Tìm hợp đồng theo ID
+            var contractDetailsQuery = from hd in _context.HopDong
+                                        join cthd in _context.ChiTietHopDong on hd.HopDongId equals cthd.HopDongId
+                                        join h in _context.Hosting on cthd.HostingId equals h.HostingId
+                                        join nd in _context.NguoiDung on hd.NhanVienId equals nd.NguoiDungId
+                                        where hd.HopDongId == id
+                                        select new
+                                        {
+                                            HopDongId = hd.HopDongId,
+                                            TenHosting = h.TenHosting,
+                                            MoTa = h.MoTa, // Mô tả dịch vụ hosting
+                                            NgayBatDau = hd.NgayBatDau,
+                                            NgayKetThuc = hd.NgayKetThuc,
+                                            TrangThai = hd.TrangThai == 0 ? "Đang chờ kích hoạt" :
+                                                hd.TrangThai == 1 ? "Đang hoạt động" : "Đã hủy",
+                                            Gia = cthd.DonGia, // Giá của dịch vụ trong hợp đồng
+                                            NhanVienHoTen = nd.HoTen,
+                                            EmailNhanVien = nd.Email // Email nhân viên hỗ trợ
+                                        };
+
+            if (role != "2") // Nếu không phải admin, chỉ lấy hợp đồng của người dùng hiện tại
+            {
+                if (!int.TryParse(userId, out int userIdInt))
                 {
-                    return NotFound("Không tìm thấy hợp đồng hoặc không có quyền truy cập.");
+                    return BadRequest("Không tìm thấy ID người dùng");
                 }
 
-                return View(contractDetails); // Trả về view hiển thị chi tiết
+                contractDetailsQuery = contractDetailsQuery.Where(hd => hd.HopDongId == id);
             }
 
-            return BadRequest("Không tìm thấy ID người dùng");
+            var contractDetails = await contractDetailsQuery.FirstOrDefaultAsync();
+
+            if (contractDetails == null)
+            {
+                return NotFound("Không tìm thấy hợp đồng hoặc bạn không có quyền truy cập.");
+            }
+
+            return View(contractDetails); // Trả về view hiển thị chi tiết hợp đồng
         }
         
         [HttpGet]
@@ -109,7 +118,7 @@ namespace RentalHosting_64130107.Controllers
         {
             var model = new RegisterContractViewModel
             {
-                Hostings = await _context.Hosting.ToListAsync()
+                Hosting = await _context.Hosting.ToListAsync()
             };
             return View(model);
         }
@@ -126,7 +135,7 @@ namespace RentalHosting_64130107.Controllers
                 if (hosting == null)
                 {
                     ModelState.AddModelError("", "Hosting không hợp lệ.");
-                    model.Hostings = await _context.Hosting.ToListAsync();
+                    model.Hosting = await _context.Hosting.ToListAsync();
                     return View(model);
                 }
 
@@ -139,7 +148,7 @@ namespace RentalHosting_64130107.Controllers
                 if (nhanVien == null)
                 {
                     ModelState.AddModelError("", "Không tìm thấy nhân viên hợp lệ.");
-                    model.Hostings = await _context.Hosting.ToListAsync();
+                    model.Hosting = await _context.Hosting.ToListAsync();
                     return View(model);
                 }
 
@@ -221,6 +230,125 @@ namespace RentalHosting_64130107.Controllers
 
             TempData["SuccessMessage"] = "Xóa hợp đồng thành công.";
             return RedirectToAction(nameof(GetContracts));
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> EditContract(int id)
+        {
+            // Tìm hợp đồng theo ID
+            var contract = await _context.HopDong
+                .Include(h => h.ChiTietHopDong)
+                .ThenInclude(c => c.Hosting)
+                .FirstOrDefaultAsync(h => h.HopDongId == id);
+
+            if (contract == null)
+            {
+                return NotFound("Hợp đồng không tồn tại.");
+            }
+
+            // Chuẩn bị ViewModel
+            var model = new EditContractModel_64130107()
+            {
+                HopDongId = contract.HopDongId,
+                NguoiDungId = contract.NguoiDungId,
+                NhanVienId = contract.NhanVienId,
+                NgayBatDau = contract.NgayBatDau,
+                NgayKetThuc = contract.NgayKetThuc,
+                TrangThai = contract.TrangThai,
+                Hosting = await _context.Hosting.ToListAsync(),
+                SelectedHostingId = contract.ChiTietHopDong.FirstOrDefault()?.HostingId ?? 0,
+                DonGia = contract.ChiTietHopDong.FirstOrDefault()?.DonGia ?? 0
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditContract(EditContractModel_64130107 model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Hosting = await _context.Hosting.ToListAsync();
+                return View(model);
+            }
+
+            // Tìm hợp đồng để chỉnh sửa
+            var contract = await _context.HopDong
+                .Include(h => h.ChiTietHopDong)
+                .FirstOrDefaultAsync(h => h.HopDongId == model.HopDongId);
+
+            if (contract == null)
+            {
+                return NotFound("Hợp đồng không tồn tại.");
+            }
+
+            // Cập nhật thông tin hợp đồng
+            contract.NguoiDungId = model.NguoiDungId;
+            contract.NhanVienId = model.NhanVienId;
+            contract.NgayBatDau = model.NgayBatDau;
+            contract.NgayKetThuc = model.NgayKetThuc;
+            contract.TrangThai = model.TrangThai;
+
+            // Cập nhật chi tiết hợp đồng
+            var contractDetail = contract.ChiTietHopDong.FirstOrDefault();
+            if (contractDetail != null)
+            {
+                contractDetail.HostingId = model.SelectedHostingId;
+                contractDetail.DonGia = model.DonGia;
+            }
+
+            // Lưu thay đổi
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Cập nhật hợp đồng thành công.";
+            return RedirectToAction(nameof(EditContract));
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> SearchContract(string contractId)
+        {
+            // Kiểm tra vai trò admin
+            var role = User.FindFirstValue(ClaimTypes.Role);
+            if (role != "2") // Role "2" là Admin
+            {
+                return Forbid("Bạn không có quyền truy cập tính năng này.");
+            }
+
+            // Tìm hợp đồng theo ID
+            if (!int.TryParse(contractId, out int id))
+            {
+                TempData["ErrorMessage"] = "ID hợp đồng không hợp lệ.";
+                return RedirectToAction(nameof(GetContracts));
+            }
+
+            var contract = await _context.HopDong
+                .Where(h => h.HopDongId == id)
+                .Select(h => new
+                {
+                    h.HopDongId,
+                    HostingName = h.ChiTietHopDong
+                        .Select(c => c.Hosting.TenHosting)
+                        .FirstOrDefault(),
+                    h.NgayBatDau,
+                    h.NgayKetThuc,
+                    TrangThai = h.TrangThai == 0 ? "Đang chờ kích hoạt" :
+                        h.TrangThai == 1 ? "Đang hoạt động" : "Đã hủy",
+                    SupportPerson = _context.NguoiDung
+                        .Where(n => n.NguoiDungId == h.NhanVienId)
+                        .Select(n => n.HoTen)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
+            if (contract == null || contract.Count == 0)
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy hợp đồng với ID này.";
+                return RedirectToAction(nameof(GetContracts));
+            }
+
+            ViewBag.IsAdmin = true;
+            return View("GetContracts", contract); // Hiển thị kết quả tìm kiếm
         }
     }
 }

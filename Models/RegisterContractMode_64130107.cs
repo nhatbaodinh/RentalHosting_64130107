@@ -4,6 +4,6 @@ namespace RentalHosting_64130107.Models
     {
         public int HostingId { get; set; }
         public int Months { get; set; }
-        public IEnumerable<HostingModel_64130107> Hostings { get; set; } = new List<HostingModel_64130107>();
+        public IEnumerable<HostingModel_64130107> Hosting { get; set; } = new List<HostingModel_64130107>();
     }
 }
