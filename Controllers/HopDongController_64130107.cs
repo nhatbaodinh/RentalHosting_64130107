@@ -141,7 +141,7 @@ namespace RentalHosting_64130107.Controllers
 
                 // Tìm một nhân viên ngẫu nhiên có Role = 1
                 var nhanVien = await _context.NguoiDung
-                    .Where(n => n.Role == 1)
+                    .Where(n => n.Role == 2)
                     .OrderBy(n => Guid.NewGuid()) // Chọn ngẫu nhiên
                     .FirstOrDefaultAsync();
 
