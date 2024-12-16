@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "czmAFRuffSA=",
+  "dgSpecHash": "rPorr+JP/o4=",
   "success": true,
   "projectFilePath": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/RentalHosting_64130107.csproj",
   "expectedPackageFiles": [
@@ -43,8 +43,9 @@
     "/Users/nhatbaodinh/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/microsoft.sqlserver.server/1.0.0/microsoft.sqlserver.server.1.0.0.nupkg.sha512",
-    "/Users/nhatbaodinh/.nuget/packages/microsoft.win32.systemevents/6.0.0/microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "/Users/nhatbaodinh/.nuget/packages/microsoft.win32.systemevents/8.0.0/microsoft.win32.systemevents.8.0.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/nhatbaodinh/.nuget/packages/qrcoder/1.6.0/qrcoder.1.6.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.composition/6.0.0/system.composition.6.0.0.nupkg.sha512",
@@ -55,7 +56,7 @@
     "/Users/nhatbaodinh/.nuget/packages/system.composition.typedparts/6.0.0/system.composition.typedparts.6.0.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.configuration.configurationmanager/6.0.1/system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
-    "/Users/nhatbaodinh/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
+    "/Users/nhatbaodinh/.nuget/packages/system.drawing.common/8.0.10/system.drawing.common.8.0.10.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.formats.asn1/5.0.0/system.formats.asn1.5.0.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.identitymodel.tokens.jwt/6.35.0/system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.io.filesystem.accesscontrol/5.0.0/system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
@@ -78,7 +79,19 @@
     "/Users/nhatbaodinh/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/Users/nhatbaodinh/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512"
+    "/Users/nhatbaodinh/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
+    "/Users/nhatbaodinh/.nuget/packages/vietqrhelper/1.0.2/vietqrhelper.1.0.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'VietQRHelper 1.0.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "VietQRHelper",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

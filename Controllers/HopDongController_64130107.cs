@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalHosting_64130107.Models;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace RentalHosting_64130107.Controllers
 {
@@ -139,7 +137,7 @@ namespace RentalHosting_64130107.Controllers
                     return View(model);
                 }
 
-                // Tìm một nhân viên ngẫu nhiên có Role = 1
+                // Tìm một nhân viên ngẫu nhiên có Role = 2
                 var nhanVien = await _context.NguoiDung
                     .Where(n => n.Role == 2)
                     .OrderBy(n => Guid.NewGuid()) // Chọn ngẫu nhiên

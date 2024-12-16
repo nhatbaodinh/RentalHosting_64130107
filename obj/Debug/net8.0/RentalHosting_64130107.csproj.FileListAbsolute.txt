@@ -44,9 +44,6 @@
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
-/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
-/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll
-/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
@@ -141,3 +138,6 @@
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/nhatbaodinh/Dev/RentalHosting_64130107/obj/Debug/net8.0/RentalHosting_64130107.sourcelink.json
+/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/QRCoder.dll
+/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll
+/Users/nhatbaodinh/Dev/RentalHosting_64130107/bin/Debug/net8.0/VietQRHelper.dll
