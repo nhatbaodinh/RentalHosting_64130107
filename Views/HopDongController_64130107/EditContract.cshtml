@@ -41,9 +41,9 @@
         <div class="form-group">
             <label asp-for="TrangThai">Trạng thái</label>
             <select asp-for="TrangThai" class="form-control">
-                <option value="0" @(Model.TrangThai == 0 ? "selected" : "")>Đang chờ kích hoạt</option>
-                <option value="1" @(Model.TrangThai == 1 ? "selected" : "")>Đang hoạt động</option>
-                <option value="2" @(Model.TrangThai == 2 ? "selected" : "")>Đã hủy</option>
+                <option value="0" selected="@(Model.TrangThai == 0)">Đang chờ kích hoạt</option>
+                <option value="1" selected="@(Model.TrangThai == 1)">Đang hoạt động</option>
+                <option value="2" selected="@(Model.TrangThai == 2)">Đã hủy</option>
             </select>
         </div>
 
@@ -52,7 +52,7 @@
             <select asp-for="SelectedHostingId" class="form-control">
                 @foreach (var hosting in Model.Hosting)
                 {
-                    <option value="@hosting.HostingId" @(Model.SelectedHostingId == hosting.HostingId ? "selected" : "")>
+                    <option value="@hosting.HostingId" selected="@(Model.SelectedHostingId == hosting.HostingId)">
                         @hosting.TenHosting
                     </option>
                 }

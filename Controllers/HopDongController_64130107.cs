@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentalHosting_64130107.Models;
 using System.Security.Claims;
+using System.Text;
 
 namespace RentalHosting_64130107.Controllers
 {
@@ -347,6 +348,76 @@ namespace RentalHosting_64130107.Controllers
 
             ViewBag.IsAdmin = true;
             return View("GetContracts", contract); // Hiển thị kết quả tìm kiếm
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> ExportContractsToCsv()
+        {
+            // Lấy UserID và Role từ Claims
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var role = User.FindFirstValue(ClaimTypes.Role); // Role "2" là Admin
+
+            IQueryable<HopDongModel_64130107> contractsQuery;
+
+            if (role == "2") // Admin
+            {
+                contractsQuery = _context.HopDong;
+            }
+            else if (int.TryParse(userId, out int userIdInt)) // Người dùng thường
+            {
+                contractsQuery = _context.HopDong.Where(h => h.NguoiDungId == userIdInt);
+            }
+            else
+            {
+                return BadRequest("Không tìm thấy ID người dùng.");
+            }
+
+            // Lấy danh sách hợp đồng
+            var contracts = await contractsQuery
+                .Select(h => new
+                {
+                    h.HopDongId,
+                    HostingName = h.ChiTietHopDong
+                        .Select(c => c.Hosting.TenHosting)
+                        .FirstOrDefault(),
+                    NgayBatDau = h.NgayBatDau.ToString("dd/MM/yyyy"),
+                    NgayKetThuc = h.NgayKetThuc.ToString("dd/MM/yyyy"),
+                    TrangThai = h.TrangThai == 0 ? "Đang chờ kích hoạt" :
+                                h.TrangThai == 1 ? "Đang hoạt động" : "Đã hủy",
+                    SupportPerson = _context.NguoiDung
+                        .Where(n => n.NguoiDungId == h.NhanVienId)
+                        .Select(n => n.HoTen)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
+            // Nếu không có hợp đồng
+            if (!contracts.Any())
+            {
+                TempData["ErrorMessage"] = "Không có hợp đồng nào để xuất.";
+                return RedirectToAction(nameof(GetContracts));
+            }
+
+            // Tạo dữ liệu CSV
+            var csvData = new StringBuilder();
+
+            // BOM để khắc phục lỗi font
+            csvData.AppendLine("\uFEFFID Hợp Đồng,Tên Hosting,Ngày Bắt Đầu,Ngày Kết Thúc,Trạng Thái,Người Hỗ Trợ");
+
+            foreach (var contract in contracts)
+            {
+                csvData.AppendLine($"{contract.HopDongId}," +
+                                   $"{contract.HostingName}," +
+                                   $"{contract.NgayBatDau}," +
+                                   $"{contract.NgayKetThuc}," +
+                                   $"{contract.TrangThai}," +
+                                   $"{contract.SupportPerson}");
+            }
+
+            // Trả về file CSV với UTF-8 BOM
+            var fileName = "DanhSachHopDong.csv";
+            var fileBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(fileBytes, "text/csv; charset=utf-8", fileName);
         }
     }
 }
