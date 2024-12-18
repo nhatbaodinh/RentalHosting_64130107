@@ -35,7 +35,7 @@ namespace RentalHosting_64130107.Controllers
                 // Nếu không phải Admin, chỉ lấy hợp đồng của người dùng hiện tại
                 if (!int.TryParse(userId, out int userIdInt))
                 {
-                    return BadRequest("Không tìm thấy ID người dùng");
+                    return RedirectToAction("Login", "NguoiDungController_64130107");
                 }
                 contractsQuery = _context.HopDong.Where(h => h.NguoiDungId == userIdInt);
             }
@@ -96,7 +96,7 @@ namespace RentalHosting_64130107.Controllers
             {
                 if (!int.TryParse(userId, out int userIdInt))
                 {
-                    return BadRequest("Không tìm thấy ID người dùng");
+                    return RedirectToAction("Login", "NguoiDungController_64130107");
                 }
 
                 contractDetailsQuery = contractDetailsQuery.Where(hd => hd.HopDongId == id);
@@ -186,7 +186,7 @@ namespace RentalHosting_64130107.Controllers
                 return RedirectToAction("RegisterContract"); // Redirect đến trang danh sách hợp đồng
             }
 
-            return BadRequest("Không tìm thấy ID người dùng");
+            return RedirectToAction("Login", "NguoiDungController_64130107");
         }
         
         [HttpPost]
@@ -369,7 +369,7 @@ namespace RentalHosting_64130107.Controllers
             }
             else
             {
-                return BadRequest("Không tìm thấy ID người dùng.");
+                return RedirectToAction("Login", "NguoiDungController_64130107");
             }
 
             // Lấy danh sách hợp đồng
@@ -418,6 +418,12 @@ namespace RentalHosting_64130107.Controllers
             var fileName = "DanhSachHopDong.csv";
             var fileBytes = Encoding.UTF8.GetBytes(csvData.ToString());
             return File(fileBytes, "text/csv; charset=utf-8", fileName);
+        }
+
+        [HttpGet]
+        public IActionResult SendSupportEmail(int contracId)
+        {
+            return View();
         }
     }
 }

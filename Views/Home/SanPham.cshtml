@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "Danh sách dịch vụ hosting";
+    var loaiHostings = new[]
+    {
+        new { LoaiHostingID = 1, TenLoai = "Shared Hosting" },
+        new { LoaiHostingID = 2, TenLoai = "VPS Hosting" },
+        new { LoaiHostingID = 3, TenLoai = "Dedicated Hosting" },
+        new { LoaiHostingID = 4, TenLoai = "Cloud Hosting" },
+        new { LoaiHostingID = 5, TenLoai = "Reseller Hosting" }
+    };
+
+    var hostings = new[]
+    {
+        // Shared Hosting
+        new { TenHosting = "Starter Shared Hosting", MoTa = "Dịch vụ cơ bản với dung lượng hạn chế, phù hợp cho cá nhân mới bắt đầu", DonGia = 30000, LoaiHostingID = 1 },
+        new { TenHosting = "Advanced Shared Hosting", MoTa = "Tăng thêm tài nguyên và hiệu năng cho website doanh nghiệp nhỏ", DonGia = 120000, LoaiHostingID = 1 },
+
+        // VPS Hosting
+        new { TenHosting = "VPS Basic Plan", MoTa = "Máy chủ ảo với CPU 2 lõi, RAM 4GB, dung lượng SSD 50GB", DonGia = 250000, LoaiHostingID = 2 },
+        new { TenHosting = "VPS Premium Plan", MoTa = "Hiệu năng mạnh mẽ hơn: CPU 4 lõi, RAM 8GB, SSD 100GB", DonGia = 450000, LoaiHostingID = 2 },
+
+        // Dedicated Hosting
+        new { TenHosting = "Standard Dedicated Server", MoTa = "Máy chủ riêng hiệu suất cao, RAM 16GB, ổ cứng 2TB", DonGia = 1800000, LoaiHostingID = 3 },
+        new { TenHosting = "Enterprise Dedicated Server", MoTa = "Dành cho doanh nghiệp lớn, CPU 8 lõi, RAM 64GB, SSD 4TB", DonGia = 3000000, LoaiHostingID = 3 },
+
+        // Cloud Hosting
+        new { TenHosting = "Cloud Starter", MoTa = "Dịch vụ đám mây linh hoạt, phù hợp cho các dự án nhỏ", DonGia = 200000, LoaiHostingID = 4 },
+        new { TenHosting = "Cloud Business", MoTa = "Đám mây chuyên nghiệp dành cho doanh nghiệp vừa và nhỏ", DonGia = 500000, LoaiHostingID = 4 },
+        new { TenHosting = "Cloud Enterprise", MoTa = "Hiệu năng cao với khả năng mở rộng không giới hạn", DonGia = 1200000, LoaiHostingID = 4 },
+
+        // Reseller Hosting
+        new { TenHosting = "Reseller Basic", MoTa = "Phù hợp cho các nhà phân phối nhỏ lẻ", DonGia = 150000, LoaiHostingID = 5 },
+        new { TenHosting = "Reseller Pro", MoTa = "Dành cho nhà phân phối lớn với nhiều khách hàng", DonGia = 350000, LoaiHostingID = 5 }
+    };
+
+    var groupedHostings = loaiHostings.Select(loai => new
+    {
+        loai.TenLoai,
+        Hostings = hostings.Where(h => h.LoaiHostingID == loai.LoaiHostingID).ToList()
+    }).ToList();
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+
+    <!-- Thẻ Loại Hosting -->
+    <div class="row">
+        @foreach (var loai in groupedHostings)
+        {
+            <div class="col-md-12">
+                <h3 class="text-primary border-bottom pb-2 mt-4">
+                    @loai.TenLoai
+                </h3>
+                <div class="row">
+                    @foreach (var hosting in loai.Hostings)
+                    {
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title text-info">@hosting.TenHosting</h5>
+                                    <p class="card-text text-muted flex-grow-1">
+                                        @hosting.MoTa
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success fw-bold">
+                                            @hosting.DonGia.ToString("C0") / tháng
+                                        </span>
+                                        <a href="/HopDongController_64130107/RegisterContract" class="btn btn-outline-primary btn-sm">Thuê ngay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

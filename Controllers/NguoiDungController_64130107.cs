@@ -109,7 +109,7 @@ namespace RentalHosting_64130107.Controllers
                 return View(user); // Trả về View với dữ liệu người dùng
             }
 
-            return BadRequest("Invalid user ID");
+            return RedirectToAction("Login", "NguoiDungController_64130107");
         }
 
         // POST: EditProfile
@@ -177,7 +177,7 @@ namespace RentalHosting_64130107.Controllers
                 return View();
             }
 
-            return BadRequest("Invalid user ID");
+            return RedirectToAction("Login", "NguoiDungController_64130107");
         }
         
         // POST: ChangePassword
@@ -222,7 +222,7 @@ namespace RentalHosting_64130107.Controllers
                 return RedirectToAction("ChangePassword");
             }
 
-            return BadRequest("Invalid user ID");
+            return RedirectToAction("Login", "NguoiDungController_64130107");
         }
     }
 }

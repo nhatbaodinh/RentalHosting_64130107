@@ -1,7 +1,7 @@
 @model RentalHosting_64130107.Models.RegisterContractViewModel
 
 @{
-ViewData["Title"] = "Register Contract";
+    ViewData["Title"] = "Đăng ký hợp đồng";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -9,17 +9,16 @@ ViewData["Title"] = "Register Contract";
 <!-- Hiển thị thông báo thành công nếu có -->
 @if (TempData["SuccessMessage"] != null)
 {
-<div class="alert alert-success">
-    @TempData["SuccessMessage"]
-</div>
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
 }
-
 
 <form asp-action="RegisterContract" method="post" id="registerContractForm">
     <div class="mb-3">
-        <label for="hostingId" class="form-label">Select Hosting</label>
+        <label for="hostingId" class="form-label">Chọn gói Hosting</label>
         <select asp-for="HostingId" id="hostingId" class="form-control" required>
-            <option value="">-- Select Hosting --</option>
+            <option value="">-- Chọn gói Hosting --</option>
             @foreach (var hosting in Model.Hosting)
             {
                 <option value="@hosting.HostingId" data-price="@hosting.DonGia">@hosting.TenHosting - @hosting.DonGia VND</option>
@@ -29,29 +28,29 @@ ViewData["Title"] = "Register Contract";
     </div>
 
     <div class="mb-3">
-        <label for="months" class="form-label">Number of Months</label>
+        <label for="months" class="form-label">Số tháng</label>
         <input asp-for="Months" id="months" type="number" class="form-control" min="1" value="1" required />
         <span asp-validation-for="Months" class="text-danger"></span>
     </div>
 
     <!-- Hiển thị ngày bắt đầu và ngày kết thúc trong form -->
     <div class="mb-3">
-        <label for="startDate" class="form-label">Start Date</label>
+        <label for="startDate" class="form-label">Ngày bắt đầu</label>
         <input type="date" id="startDate" class="form-control" readonly />
     </div>
 
     <div class="mb-3">
-        <label for="endDate" class="form-label">End Date</label>
+        <label for="endDate" class="form-label">Ngày kết thúc</label>
         <input type="date" id="endDate" class="form-control" readonly />
     </div>
 
     <!-- Hiển thị tổng tiền phải thanh toán -->
     <div class="mb-3">
-        <label for="totalPrice" class="form-label">Total Price</label>
+        <label for="totalPrice" class="form-label">Tổng tiền</label>
         <input type="text" id="totalPrice" class="form-control" readonly />
     </div>
 
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Đăng ký</button>
 </form>
 
 <script>

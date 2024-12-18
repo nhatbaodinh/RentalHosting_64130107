@@ -36,7 +36,7 @@ CREATE TABLE Hosting (
     HostingID INT PRIMARY KEY IDENTITY(1,1),   -- ID hosting
     TenHosting NVARCHAR(100) NOT NULL,         -- Tên dịch vụ hosting
     MoTa NVARCHAR(MAX),                        -- Mô tả dịch vụ
-    DonGia DECIMAL(18,2) NOT NULL,             -- Đơn giá
+    DonGia DECIMAL(18) NOT NULL,             -- Đơn giá
     LoaiHostingID INT NOT NULL,                       -- Loại hosting
     FOREIGN KEY (LoaiHostingID) REFERENCES LoaiHosting(LoaiHostingID)
 );
@@ -60,7 +60,7 @@ CREATE TABLE ChiTietHopDong (
     HopDongID INT NOT NULL,                   -- ID hợp đồng
     HostingID INT NOT NULL,                    -- ID hosting
     SoLuong INT NOT NULL CHECK (SoLuong > 0),  -- Số lượng dịch vụ
-    DonGia DECIMAL(18,2) NOT NULL,             -- Đơn giá dịch vụ
+    DonGia DECIMAL(18) NOT NULL,             -- Đơn giá dịch vụ
     PRIMARY KEY (HopDongID, HostingID),       -- Khóa chính
     FOREIGN KEY (HopDongID) REFERENCES HopDong(HopDongID), -- Liên kết với hợp đồng
     FOREIGN KEY (HostingID) REFERENCES Hosting(HostingID)    -- Liên kết với hosting
@@ -91,11 +91,11 @@ VALUES
 -- Đổ dữ liệu mẫu cho bảng Hosting
 INSERT INTO Hosting (TenHosting, MoTa, DonGia, LoaiHostingID)
 VALUES
-(N'Basic Shared Hosting', N'Dịch vụ hosting cơ bản, phù hợp với cá nhân', 50000.00, 1),
-(N'Pro Shared Hosting', N'Dịch vụ hosting nâng cao cho doanh nghiệp nhỏ', 150000.00, 1),
-(N'VPS Starter', N'Máy chủ ảo hiệu năng tốt, phù hợp phát triển ứng dụng', 300000.00, 2),
-(N'VPS Advanced', N'Dịch vụ VPS với tài nguyên lớn hơn', 500000.00, 2),
-(N'Dedicated Server', N'Máy chủ riêng biệt, hiệu năng cao nhất', 2000000.00, 3);
+(N'Basic Shared Hosting', N'Dịch vụ hosting cơ bản, phù hợp với cá nhân', 50000, 1),
+(N'Pro Shared Hosting', N'Dịch vụ hosting nâng cao cho doanh nghiệp nhỏ', 150000, 1),
+(N'VPS Starter', N'Máy chủ ảo hiệu năng tốt, phù hợp phát triển ứng dụng', 300000, 2),
+(N'VPS Advanced', N'Dịch vụ VPS với tài nguyên lớn hơn', 500000, 2),
+(N'Dedicated Server', N'Máy chủ riêng biệt, hiệu năng cao nhất', 2000000, 3);
 
 -- Đổ dữ liệu mẫu cho bảng HopDong
 INSERT INTO HopDong (NgayBatDau, NgayKetThuc, TrangThai, NguoiDungID, NhanVienID)
@@ -109,11 +109,11 @@ VALUES
 -- Đổ dữ liệu mẫu cho bảng ChiTietHopDong
 INSERT INTO ChiTietHopDong (HopDongID, HostingID, SoLuong, DonGia)
 VALUES
-(1, 1, 1, 50000.00),
-(1, 3, 1, 300000.00),
-(2, 2, 2, 150000.00),
-(3, 4, 1, 500000.00),
-(4, 5, 1, 2000000.00);
+(1, 1, 1, 50000),
+(1, 3, 1, 300000),
+(2, 2, 2, 150000),
+(3, 4, 1, 500000),
+(4, 5, 1, 2000000);
 
 -- Kiểm tra dữ liệu trong bảng NguoiDung
 SELECT * FROM NguoiDung;
