@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace RentalHosting_64130107.Models
 {
     public class ChiTietHopDongModel_64130107

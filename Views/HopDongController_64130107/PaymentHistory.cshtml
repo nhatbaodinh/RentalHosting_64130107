@@ -1,0 +1,33 @@
+@model IEnumerable<RentalHosting_64130107.Models.ThanhToanModel_64130107>
+
+@{
+ViewData["Title"] = "Lịch sử thanh toán";
+}
+
+<h2>Lịch sử thanh toán</h2>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th>ID Thanh toán</th>
+		<th>Số tiền</th>
+		<th>Ngày thanh toán</th>
+		<th>Trạng thái</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var payment in Model)
+	{
+	<tr>
+		<td>@payment.PaymentId</td>
+		<td>@payment.Amount</td>
+		<td>@payment.PaymentDate.ToString("dd/MM/yyyy")</td>
+		<td>@payment.PaymentStatus</td>
+	</tr>
+	}
+	</tbody>
+</table>
+
+<div>
+	<a href="@Url.Action("GetContracts", "HopDongController_64130107")">Quay lại danh sách hợp đồng</a>
+</div>

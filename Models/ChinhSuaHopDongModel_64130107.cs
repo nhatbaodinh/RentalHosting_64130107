@@ -1,6 +1,6 @@
 namespace RentalHosting_64130107.Models;
 
-public class EditContractModel_64130107
+public class ChinhSuaHopDongModel_64130107
 {
     public int HopDongId { get; set; }
     public int NguoiDungId { get; set; }

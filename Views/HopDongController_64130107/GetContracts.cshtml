@@ -79,10 +79,19 @@ var isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
 				}
 				else
 				{
-				<a href="@Url.Action("Details", "HopDongController_64130107", new { id = contract.HopDongId })"
-				   class="btn btn-warning btn-sm">Gia hạn</a>
 				<a href="@Url.Action("Support", "HopDongController_64130107", new { id = contract.HopDongId })"
 				   class="btn btn-success btn-sm">Hỗ trợ</a>
+				}
+				@if (contract.TrangThai == "Đang chờ kích hoạt")
+				{
+				<!-- Nút Thanh toán cho người dùng khi hợp đồng đang chờ kích hoạt -->
+				<a href="@Url.Action("MakePayment", "HopDongController_64130107", new { id = contract.HopDongId })"
+				   class="btn btn-primary btn-sm">Thanh toán</a>
+				}
+				else
+				{
+					<a href="@Url.Action("Details", "HopDongController_64130107", new { id = contract.HopDongId })"
+					   class="btn btn-warning btn-sm">Gia hạn</a>
 				}
 			</td>
 		</tr>

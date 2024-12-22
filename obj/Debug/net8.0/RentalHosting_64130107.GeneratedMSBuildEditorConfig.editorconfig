@@ -34,10 +34,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9TYW5QaGFtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/ThanhToan.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9UaGFuaFRvYW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/ContractDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvQ29udHJhY3REZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,6 +44,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/GetContracts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvR2V0Q29udHJhY3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/MakePayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvTWFrZVBheW1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvUGF5bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/PaymentHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9wRG9uZ0NvbnRyb2xsZXJfNjQxMzAxMDcvUGF5bWVudEhpc3RvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/RegisterContract.cshtml]

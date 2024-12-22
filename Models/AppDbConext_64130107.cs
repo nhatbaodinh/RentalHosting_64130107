@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using RentalHosting_64130107.Models;
 
 namespace RentalHosting_64130107.Models;
 

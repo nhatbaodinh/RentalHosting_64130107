@@ -246,7 +246,7 @@ namespace RentalHosting_64130107.Controllers
             }
 
             // Chuẩn bị ViewModel
-            var model = new EditContractModel_64130107()
+            var model = new ChinhSuaHopDongModel_64130107()
             {
                 HopDongId = contract.HopDongId,
                 NguoiDungId = contract.NguoiDungId,
@@ -264,7 +264,7 @@ namespace RentalHosting_64130107.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditContract(EditContractModel_64130107 model)
+        public async Task<IActionResult> EditContract(ChinhSuaHopDongModel_64130107 model)
         {
             if (!ModelState.IsValid)
             {
@@ -419,11 +419,70 @@ namespace RentalHosting_64130107.Controllers
             var fileBytes = Encoding.UTF8.GetBytes(csvData.ToString());
             return File(fileBytes, "text/csv; charset=utf-8", fileName);
         }
-
+        
         [HttpGet]
-        public IActionResult SendSupportEmail(int contracId)
+        public IActionResult MakePayment(int contractId)
         {
-            return View();
+            // Tìm hợp đồng theo ID
+            var contract = _context.HopDong
+                .Include(h => h.ChiTietHopDong)
+                .FirstOrDefault(h => h.HopDongId == contractId);
+            
+            if (contract == null)
+            {
+                TempData["ErrorMessage"] = "Hợp đồng không tồn tại.";
+                return RedirectToAction("GetContracts", "HopDongController_64130107");
+            }
+
+            var paymentModel = new ThanhToanModel_64130107
+            {
+                Amount = contract.ChiTietHopDong.Sum(c => c.DonGia), // Tổng tiền phải thanh toán
+                UserId = contract.NguoiDungId,
+                PaymentDate = DateTime.Now,
+                PaymentStatus = "Chờ xử lý" // Trạng thái ban đầu là chờ xử lý
+            };
+
+            return View(paymentModel);
         }
+
+        // // Xử lý thanh toán
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> ProcessPayment(ThanhToanModel_64130107 paymentModel)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         // Giả lập xử lý thanh toán thành công
+        //         paymentModel.PaymentStatus = "Đã thanh toán";
+        //         _context.Payment.Add(paymentModel);
+        //         await _context.SaveChangesAsync();
+        //
+        //         // Cập nhật trạng thái hợp đồng là đã thanh toán
+        //         var contract = await _context.HopDong.FindAsync(paymentModel.UserId);
+        //         if (contract != null)
+        //         {
+        //             contract.TrangThai = 1; // Đánh dấu trạng thái hợp đồng là "Đã thanh toán"
+        //             await _context.SaveChangesAsync();
+        //         }
+        //
+        //         TempData["SuccessMessage"] = "Thanh toán thành công!";
+        //         return RedirectToAction("GetContracts", "HopDongController_64130107");
+        //     }
+        //
+        //     return View("MakePayment", paymentModel); // Nếu có lỗi, quay lại trang thanh toán
+        // }
+        //
+        // // Lịch sử thanh toán của người dùng
+        // [HttpGet]
+        // public async Task<IActionResult> PaymentHistory()
+        // {
+        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //     var payments = await _context.Payment
+        //         .Where(p => p.UserId.ToString() == userId)
+        //         .OrderByDescending(p => p.PaymentDate)
+        //         .ToListAsync();
+        //
+        //     return View(payments);
+        // }
     }
 }

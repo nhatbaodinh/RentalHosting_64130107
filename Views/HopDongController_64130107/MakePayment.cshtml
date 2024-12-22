@@ -1,0 +1,25 @@
+@model RentalHosting_64130107.Models.ThanhToanModel_64130107
+
+@{
+ViewData["Title"] = "Thanh toán hợp đồng";
+}
+
+<h2>Thanh toán hợp đồng</h2>
+
+<form asp-action="ProcessPayment" method="post">
+	<div class="form-group">
+		<label for="Amount">Số tiền phải thanh toán</label>
+		<input type="text" class="form-control" id="Amount" value="@Model.Amount" disabled />
+	</div>
+
+	<div class="form-group">
+		<label for="PaymentDate">Ngày thanh toán</label>
+		<input type="date" class="form-control" id="PaymentDate" value="@Model.PaymentDate.ToString("yyyy-MM-dd")" disabled />
+	</div>
+
+	<button type="submit" class="btn btn-primary">Thanh toán</button>
+</form>
+
+<div>
+	<a href="@Url.Action("GetContracts", "HopDongController_64130107")">Quay lại danh sách hợp đồng</a>
+</div>
