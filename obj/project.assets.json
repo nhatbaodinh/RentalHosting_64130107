@@ -4062,11 +4062,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/RentalHosting_64130107.csproj",
+      "projectUniqueName": "/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/RentalHosting_64130107.csproj",
       "projectName": "RentalHosting_64130107",
-      "projectPath": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/RentalHosting_64130107.csproj",
+      "projectPath": "/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/RentalHosting_64130107.csproj",
       "packagesPath": "/Users/nhatbaodinh/.nuget/packages/",
-      "outputPath": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/obj/",
+      "outputPath": "/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/nhatbaodinh/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "16FKz74cBZI=",
+  "dgSpecHash": "RRo8q97n7GI=",
   "success": true,
-  "projectFilePath": "/Users/nhatbaodinh/Dev/RentalHosting_64130107/RentalHosting_64130107.csproj",
+  "projectFilePath": "/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/RentalHosting_64130107.csproj",
   "expectedPackageFiles": [
     "/Users/nhatbaodinh/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/nhatbaodinh/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
