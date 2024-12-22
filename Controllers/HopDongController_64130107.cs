@@ -57,6 +57,10 @@ namespace RentalHosting_64130107.Controllers
                     SupportPerson = _context.NguoiDung
                         .Where(n => n.NguoiDungId == h.NhanVienId)
                         .Select(n => n.HoTen)
+                        .FirstOrDefault(),
+                    SupportPersonEmail = _context.NguoiDung
+                        .Where(n => n.NguoiDungId == h.NhanVienId)
+                        .Select(n => n.Email)
                         .FirstOrDefault()
                 })
                 .ToListAsync();

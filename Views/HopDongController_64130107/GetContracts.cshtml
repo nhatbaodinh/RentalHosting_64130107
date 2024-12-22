@@ -1,108 +1,134 @@
 @model IEnumerable<dynamic>
 
 @{
-ViewData["Title"] = "Danh sách dịch vụ";
+ViewData["Title"] = "Danh sách dịch vụ đang thuê";
 var isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
 }
 
 <div class="container mt-5">
-	<h2 class="mb-4">@ViewData["Title"]</h2>
+	<div class="row">
+		<div class="col-12">
+			<h2 class="text-center mb-4 ">@ViewData["Title"]</h2>
+		</div>
+	</div>
 
 	<!-- Thanh tác vụ -->
-	<div class="d-flex justify-content-between align-items-center mb-3">
-		@if (isAdmin)
-		{
-		<form class="d-flex" action="@Url.Action("SearchContract", "HopDongController_64130107")" method="get">
-			<input type="text" name="contractId" class="form-control me-2" placeholder="Tìm kiếm theo ID hợp đồng" />
-			<button type="submit" class="btn btn-secondary" style="width: 125px">Tìm kiếm</button>
-		</form>
-		<a href="@Url.Action("ExportContractsToCsv", "HopDongController_64130107")" class="btn btn-primary">Xuất danh sách</a>
-		}
-		else
-		{
-		<a href="@Url.Action("RegisterContract", "HopDongController_64130107")" class="btn btn-primary">Thuê dịch vụ</a>
-		}
+	<div class="row mb-4">
+		<div class="col-12 d-flex justify-content-between align-items-center">
+			@if (isAdmin)
+			{
+			<form class="d-flex" action="@Url.Action("SearchContract", "HopDongController_64130107")" method="get">
+				<input type="text" name="contractId" class="form-control me-2" placeholder="Tìm kiếm theo ID hợp đồng" />
+				<button type="submit" class="btn btn-secondary">
+					<i class="bi bi-search"></i> Tìm kiếm
+				</button>
+			</form>
+			<a href="@Url.Action("ExportContractsToCsv", "HopDongController_64130107")" class="btn btn-success">
+				<i class="bi bi-download"></i> Xuất danh sách
+			</a>
+			}
+			else
+			{
+				<div class="d-flex justify-content-end w-100">
+					<a href="@Url.Action("RegisterContract", "HopDongController_64130107")" class="btn btn-primary">Đăng Ký Dịch Vụ</a>
+				</div>
+			}
+		</div>
 	</div>
 
 	<!-- Thông báo -->
 	@if (TempData["ErrorMessage"] != null)
 	{
-	<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+	<div class="alert alert-danger text-center">@TempData["ErrorMessage"]</div>
 	}
 	@if (TempData["SuccessMessage"] != null)
 	{
-	<div class="alert alert-success">@TempData["SuccessMessage"]</div>
+	<div class="alert alert-success text-center">@TempData["SuccessMessage"]</div>
 	}
 
 	<!-- Bảng danh sách hợp đồng -->
-	<table class="table table-striped table-bordered table-hover">
-		<thead class="table-dark">
-		<tr>
-			<th>ID Hợp Đồng</th>
-			<th>Tên Hosting</th>
-			<th>Ngày Bắt Đầu</th>
-			<th>Ngày Kết Thúc</th>
-			<th>Trạng Thái</th>
-			<th>Người Hỗ Trợ</th>
-			<th>Quản lý</th>
-		</tr>
-		</thead>
-		<tbody>
-		@if (Model.Any())
-		{
-		@foreach (var contract in Model)
-		{
-		<tr>
-			<td>@contract.HopDongId</td>
-			<td>@contract.HostingName</td>
-			<td>@contract.NgayBatDau.ToString("dd/MM/yyyy")</td>
-			<td>@contract.NgayKetThuc.ToString("dd/MM/yyyy")</td>
-			<td>
-                            <span class="badge @(contract.TrangThai == "Active" ? "bg-success" : "bg-secondary")">
-                                @contract.TrangThai
-                            </span>
-			</td>
-			<td>@contract.SupportPerson</td>
-			<td class="d-flex gap-2">
-				<a href="@Url.Action("ContractDetails", "HopDongController_64130107", new { id = contract.HopDongId })"
-				   class="btn btn-info btn-sm">Chi tiết</a>
-
-				@if (isAdmin)
-				{
-				<a href="@Url.Action("EditContract", "HopDongController_64130107", new { id = contract.HopDongId })"
-				   class="btn btn-warning btn-sm">Chỉnh sửa</a>
-				<form asp-action="DeleteContract" asp-route-id="@contract.HopDongId" method="post"
-				      onsubmit="return confirm('Bạn có chắc muốn xóa hợp đồng này?');"
-				      class="d-inline">
-					<button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-				</form>
-				}
-				else
-				{
-				<a href="@Url.Action("Support", "HopDongController_64130107", new { id = contract.HopDongId })"
-				   class="btn btn-success btn-sm">Hỗ trợ</a>
-				}
-				@if (contract.TrangThai == "Đang chờ kích hoạt")
-				{
-				<!-- Nút Thanh toán cho người dùng khi hợp đồng đang chờ kích hoạt -->
-				<a href="@Url.Action("Payment", "HopDongController_64130107", new { id = contract.HopDongId })"
-				   class="btn btn-primary btn-sm">Thanh toán</a>
-				}
-				else
-				{
-					<a href="@Url.Action("Details", "HopDongController_64130107", new { id = contract.HopDongId })"
-					   class="btn btn-warning btn-sm">Gia hạn</a>
-				}
-			</td>
-		</tr>
-		}
-		}
-		else
-		{
-		<tr>
-			<td colspan="7" class="text-center text-muted">Không có hợp đồng nào được tìm thấy.</td>
-		</tr>
-		}
-		</tbody>
-	</table>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover align-middle">
+			<thead class="table-dark text-center">
+			<tr>
+				<th>ID Hợp Đồng</th>
+				<th>Tên Hosting</th>
+				<th>Ngày Bắt Đầu</th>
+				<th>Ngày Kết Thúc</th>
+				<th>Trạng Thái</th>
+				<th>Người Hỗ Trợ</th>
+				<th>Quản lý</th>
+			</tr>
+			</thead>
+			<tbody>
+			@if (Model.Any())
+			{
+			@foreach (var contract in Model)
+			{
+			<tr>
+				<td class="text-center">@contract.HopDongId</td>
+				<td>@contract.HostingName</td>
+				<td class="text-center">@contract.NgayBatDau.ToString("dd/MM/yyyy")</td>
+				<td class="text-center">@contract.NgayKetThuc.ToString("dd/MM/yyyy")</td>
+				<td class="text-center">
+                                <span class="badge @(contract.TrangThai == "Active" ? "bg-success" : "bg-secondary")">
+                                    @contract.TrangThai
+                                </span>
+				</td>
+				<td class="text-center">@contract.SupportPerson</td>
+				<td>
+					<div class="d-flex gap-2">
+						<a href="@Url.Action("ContractDetails", "HopDongController_64130107", new { id = contract.HopDongId })"
+						   class="btn btn-info btn-sm">
+							<i class="bi bi-eye"></i> Chi tiết
+						</a>
+						@if (isAdmin)
+						{
+						<a href="@Url.Action("EditContract", "HopDongController_64130107", new { id = contract.HopDongId })"
+						   class="btn btn-warning btn-sm">
+							<i class="bi bi-pencil"></i> Sửa
+						</a>
+						<form asp-action="DeleteContract" asp-route-id="@contract.HopDongId" method="post"
+						      onsubmit="return confirm('Bạn có chắc muốn xóa hợp đồng này?');"
+						      class="d-inline">
+							<button type="submit" class="btn btn-danger btn-sm">
+								<i class="bi bi-trash"></i> Xóa
+							</button>
+						</form>
+						}
+						else
+						{
+						<a href="mailto:@contract.SupportPersonEmail?subject=Yêu cầu hỗ trợ&body=Kính gửi Admin,%0D%0ATôi cần hỗ trợ về hợp đồng với ID: @contract.HopDongId.%0D%0AXin cảm ơn."
+						   class="btn btn-success btn-sm">
+							<i class="bi bi-envelope"></i> Hỗ trợ
+						</a>
+						}
+						@if (contract.TrangThai == "Đang chờ kích hoạt")
+						{
+						<a href="@Url.Action("Payment", "HopDongController_64130107", new { id = contract.HopDongId })"
+						   class="btn btn-primary btn-sm">
+							<i class="bi bi-credit-card"></i> Thanh toán
+						</a>
+						}
+						else
+						{
+						<a href="@Url.Action("Details", "HopDongController_64130107", new { id = contract.HopDongId })"
+						   class="btn btn-secondary btn-sm">
+							<i class="bi bi-clock"></i> Gia hạn
+						</a>
+						}
+					</div>
+				</td>
+			</tr>
+			}
+			}
+			else
+			{
+			<tr>
+				<td colspan="7" class="text-center text-muted">Không có hợp đồng nào được tìm thấy.</td>
+			</tr>
+			}
+			</tbody>
+		</table>
+	</div>
 </div>

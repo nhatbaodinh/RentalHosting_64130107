@@ -6,13 +6,6 @@ namespace RentalHosting_64130107.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -23,12 +16,12 @@ namespace RentalHosting_64130107.Controllers
             return View();
         }
 
-        public IActionResult KhuyenMai()
+        public IActionResult Discount()
         {
             return View();
         }
         
-        public IActionResult SanPham()
+        public IActionResult Products()
         {
             return View();
         }

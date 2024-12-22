@@ -18,20 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/Discount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9EaXNjb3VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/KhuyenMai.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9LaHV5ZW5NYWkuY3NodG1s
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/SanPham.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9TYW5QaGFtLmNzaHRtbA==
+[/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/Home/Products.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcm9kdWN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/Views/HopDongController_64130107/ContractDetails.cshtml]
