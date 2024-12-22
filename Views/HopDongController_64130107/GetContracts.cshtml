@@ -85,7 +85,7 @@ var isAdmin = ViewBag.IsAdmin != null && (bool)ViewBag.IsAdmin;
 				@if (contract.TrangThai == "Đang chờ kích hoạt")
 				{
 				<!-- Nút Thanh toán cho người dùng khi hợp đồng đang chờ kích hoạt -->
-				<a href="@Url.Action("MakePayment", "HopDongController_64130107", new { id = contract.HopDongId })"
+				<a href="@Url.Action("Payment", "HopDongController_64130107", new { id = contract.HopDongId })"
 				   class="btn btn-primary btn-sm">Thanh toán</a>
 				}
 				else

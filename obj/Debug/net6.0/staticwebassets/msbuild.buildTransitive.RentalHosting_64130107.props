@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/RentalHosting_64130107.props" />
+</Project>

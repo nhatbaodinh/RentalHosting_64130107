@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using RentalHosting_64130107.Models;
 using System.Security.Claims;
 using System.Text;
+using QRCoder;
+using VietQRHelper;
 
 namespace RentalHosting_64130107.Controllers
 {
@@ -10,11 +12,11 @@ namespace RentalHosting_64130107.Controllers
     {
         private readonly AppDbContext _context;
 
-        public HopDongController_64130107(AppDbContext context)
+        public HopDongController_64130107(AppDbContext context, ILogger<HopDongController_64130107> logger)
         {
             _context = context;
         }
-
+        
         // Lấy danh sách hợp đồng của người dùng
         [HttpGet]
         public async Task<IActionResult> GetContracts()
@@ -246,7 +248,7 @@ namespace RentalHosting_64130107.Controllers
             }
 
             // Chuẩn bị ViewModel
-            var model = new ChinhSuaHopDongModel_64130107()
+            var model = new ChinhSuaHopDong()
             {
                 HopDongId = contract.HopDongId,
                 NguoiDungId = contract.NguoiDungId,
@@ -264,7 +266,7 @@ namespace RentalHosting_64130107.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditContract(ChinhSuaHopDongModel_64130107 model)
+        public async Task<IActionResult> EditContract(ChinhSuaHopDong model)
         {
             if (!ModelState.IsValid)
             {
@@ -421,68 +423,66 @@ namespace RentalHosting_64130107.Controllers
         }
         
         [HttpGet]
-        public IActionResult MakePayment(int contractId)
+        public async Task<IActionResult> Payment(int id)
         {
-            // Tìm hợp đồng theo ID
-            var contract = _context.HopDong
-                .Include(h => h.ChiTietHopDong)
-                .FirstOrDefault(h => h.HopDongId == contractId);
-            
-            if (contract == null)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(userId, out int userIdInt))
             {
-                TempData["ErrorMessage"] = "Hợp đồng không tồn tại.";
-                return RedirectToAction("GetContracts", "HopDongController_64130107");
+                var contract = await _context.HopDong
+                    .Include(h => h.ChiTietHopDong)
+                    .ThenInclude(c => c.Hosting)
+                    .FirstOrDefaultAsync(h => h.HopDongId == id);
+
+                if (contract == null)
+                {
+                    return NotFound("Hợp đồng không tồn tại.");
+                }
+
+                // Kiểm tra xem hợp đồng đã thanh toán chưa
+                if (contract.TrangThai == 1)
+                {
+                    TempData["ErrorMessage"] = "Hợp đồng đã được thanh toán.";
+                    return RedirectToAction(nameof(GetContracts));
+                }
+
+                // Tính toán số tiền cần thanh toán
+                decimal totalPrice = contract.ChiTietHopDong.Sum(c => c.DonGia);
+
+                // Tạo nội dung mã QR thanh toán
+                var qrPay = QRPay.InitVietQR(
+                    bankBin: BankApp.BanksObject[BankKey.TPBANK].bin,
+                    bankNumber: "44414022004", // Số tài khoản
+                    amount: totalPrice.ToString(),
+                    purpose: $"Thanh toán hợp đồng {contract.HopDongId}" // Nội dung thanh toán
+                );
+                var qrContent = qrPay.Build();
+
+                // Tạo hình ảnh QR
+                string qrCodeImage;
+                using (var qrGenerator = new QRCodeGenerator())
+                {
+                    var qrCodeData = qrGenerator.CreateQrCode(qrContent, QRCodeGenerator.ECCLevel.Q);
+                    using (var qrCode = new PngByteQRCode(qrCodeData))
+                    {
+                        qrCodeImage = "data:image/png;base64," + Convert.ToBase64String(qrCode.GetGraphic(3));
+                    }
+                }
+
+                // Chuẩn bị thông tin cho ViewModel
+                var model = new ThanhToanModel_64130107()
+                {
+                    HopDongId = contract.HopDongId,
+                    TenHosting = contract.ChiTietHopDong.FirstOrDefault()?.Hosting.TenHosting,
+                    NgayBatDau = contract.NgayBatDau,
+                    NgayKetThuc = contract.NgayKetThuc,
+                    TotalPrice = totalPrice,
+                    QRCodeImage = qrCodeImage
+                };
+
+                return View(model);
             }
 
-            var paymentModel = new ThanhToanModel_64130107
-            {
-                Amount = contract.ChiTietHopDong.Sum(c => c.DonGia), // Tổng tiền phải thanh toán
-                UserId = contract.NguoiDungId,
-                PaymentDate = DateTime.Now,
-                PaymentStatus = "Chờ xử lý" // Trạng thái ban đầu là chờ xử lý
-            };
-
-            return View(paymentModel);
+            return RedirectToAction("Login", "NguoiDungController_64130107");
         }
-
-        // // Xử lý thanh toán
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> ProcessPayment(ThanhToanModel_64130107 paymentModel)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         // Giả lập xử lý thanh toán thành công
-        //         paymentModel.PaymentStatus = "Đã thanh toán";
-        //         _context.Payment.Add(paymentModel);
-        //         await _context.SaveChangesAsync();
-        //
-        //         // Cập nhật trạng thái hợp đồng là đã thanh toán
-        //         var contract = await _context.HopDong.FindAsync(paymentModel.UserId);
-        //         if (contract != null)
-        //         {
-        //             contract.TrangThai = 1; // Đánh dấu trạng thái hợp đồng là "Đã thanh toán"
-        //             await _context.SaveChangesAsync();
-        //         }
-        //
-        //         TempData["SuccessMessage"] = "Thanh toán thành công!";
-        //         return RedirectToAction("GetContracts", "HopDongController_64130107");
-        //     }
-        //
-        //     return View("MakePayment", paymentModel); // Nếu có lỗi, quay lại trang thanh toán
-        // }
-        //
-        // // Lịch sử thanh toán của người dùng
-        // [HttpGet]
-        // public async Task<IActionResult> PaymentHistory()
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //     var payments = await _context.Payment
-        //         .Where(p => p.UserId.ToString() == userId)
-        //         .OrderByDescending(p => p.PaymentDate)
-        //         .ToListAsync();
-        //
-        //     return View(payments);
-        // }
     }
 }

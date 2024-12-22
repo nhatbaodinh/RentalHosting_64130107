@@ -1,0 +1,56 @@
+@model ThanhToanModel_64130107
+
+@{
+    ViewData["Title"] = "Thanh toán hợp đồng";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Thông tin hợp đồng</h5>
+            <p class="card-text"><strong>ID Hợp Đồng:</strong> @Model.HopDongId</p>
+            <p class="card-text"><strong>Tên Hosting:</strong> @Model.TenHosting</p>
+            <p class="card-text"><strong>Ngày Bắt Đầu:</strong> @Model.NgayBatDau.ToString("dd/MM/yyyy")</p>
+            <p class="card-text"><strong>Ngày Kết Thúc:</strong> @Model.NgayKetThuc.ToString("dd/MM/yyyy")</p>
+            <p class="card-text"><strong>Ngày thanh toán:</strong> @DateTime.Now.ToString("dd/MM/yyyy")</p>
+            <p class="card-text"><strong>Tổng Giá:</strong> @Model.TotalPrice.ToString("C0")</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body text-center">
+            <h5 class="card-title">Quét Mã Sau Và Thanh Toán Để Kích Hoạt Dịch Vụ</h5>
+            <img src="@Model.QRCodeImage" alt="QR Code" />
+        </div>
+    </div>
+
+    <!-- Success message will be inserted here -->
+    <div id="successMessageContainer" class="mt-3"></div>
+
+    <!-- Centering the button -->
+    <div class="d-flex justify-content-center">
+        <button id="paymentButton" class="btn btn-primary mt-1">Đã Thanh Toán</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // Add click event listener to the button
+    document.getElementById("paymentButton").addEventListener("click", function () {
+        // Create success message dynamically
+        var successMessage = document.createElement("div");
+        successMessage.className = "alert alert-success text-center";
+        successMessage.innerHTML = "Xác nhận thanh toán! Chờ Admin kích hoạt dịch vụ của bạn trong vòng 5 - 10 phút";
+
+        // Insert success message below the QR code section
+        var successMessageContainer = document.getElementById("successMessageContainer");
+        successMessageContainer.innerHTML = ''; // Clear any previous messages
+        successMessageContainer.appendChild(successMessage);
+
+        // Redirect after 5 seconds
+        setTimeout(function () {
+            window.location.href = '@Url.Action("GetContracts", "HopDongController_64130107")';
+        }, 5000); // Redirects after 5 seconds
+    });
+</script>

@@ -67,17 +67,6 @@ CREATE TABLE ChiTietHopDong (
 );
 GO
 
--- Bảng LichSuThanhToan
-CREATE TABLE LichSuThanhToan (
-     ThanhToanID INT PRIMARY KEY IDENTITY(1,1),  -- ID thanh toán
-     HopDongID INT NOT NULL,                      -- ID hợp đồng
-     NgayThanhToan DATE NOT NULL,                 -- Ngày thanh toán
-     SoTienThanhToan DECIMAL(18,2) NOT NULL,      -- Số tiền thanh toán
-     HinhThucThanhToan NVARCHAR(50),              -- Hình thức thanh toán (ví dụ: chuyển khoản, tiền mặt)
-     FOREIGN KEY (HopDongID) REFERENCES HopDong(HopDongID) -- Liên kết với hợp đồng
-);
-GO
-
 -- Thêm 30 khách hàng (Role = 0)
 INSERT INTO NguoiDung (HoTen, Email, MatKhau, SoDienThoai, DiaChi, Role)
 VALUES
@@ -305,15 +294,6 @@ VALUES
 (59, 3, 1, 300000),
 (59, 4, 1, 500000),
 (60, 5, 1, 2000000);
-
--- Thêm dữ liệu mẫu cho bảng LichSuThanhToan
-INSERT INTO LichSuThanhToan (HopDongID, NgayThanhToan, SoTienThanhToan, HinhThucThanhToan)
-VALUES
-(1, '2024-01-10', 50000, N'Chuyển khoản'),
-(1, '2024-02-10', 50000, N'Tiền mặt'),
-(2, '2024-02-05', 300000, N'Chuyển khoản'),
-(2, '2024-03-05', 500000, N'Chuyển khoản'),
-(3, '2024-03-10', 2000000, N'Chuyển khoản');
 
 -- Kiểm tra dữ liệu trong bảng NguoiDung
 SELECT * FROM NguoiDung;

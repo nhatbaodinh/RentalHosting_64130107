@@ -284,3 +284,4 @@
 /Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/obj/Debug/net8.0/RentalHosting_64130107.pdb
 /Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/obj/Debug/net8.0/RentalHosting_64130107.genruntimeconfig.cache
 /Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/obj/Debug/net8.0/ref/RentalHosting_64130107.dll
+/Users/nhatbaodinh/Dev/Phát triển ứng dụng Web 1/RentalHosting_64130107/bin/Debug/net8.0/System.Private.Windows.Core.dll
