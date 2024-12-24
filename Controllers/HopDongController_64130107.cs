@@ -188,7 +188,7 @@ namespace RentalHosting_64130107.Controllers
                 await _context.SaveChangesAsync();
 
                 // Trả về thông tin hợp đồng đã đăng ký cho người dùng (ví dụ: thông báo thành công và thông tin hợp đồng)
-                TempData["SuccessMessage"] = $"Đăng ký dịch vụ thành công! Số tiền phải trả: {totalPrice} VND. Ngày kết thúc: {endDate.ToString("dd/MM/yyyy")}.";
+                TempData["SuccessMessage"] = $"Đăng ký dịch vụ thành công! Vui lòng thanh toán số tiền {totalPrice} VND để kích hoạt dịch vụ.";
                 return RedirectToAction("RegisterContract"); // Redirect đến trang danh sách hợp đồng
             }
 
